@@ -3,7 +3,7 @@ import { generateMarkdown } from '../utils/markdownGenerator';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import toast from 'react-hot-toast';
-import { FaCopy, FaCheck, FaEye, FaCode } from 'react-icons/fa';
+import { FaCopy, FaCheck, FaEye, FaCode, FaDownload } from 'react-icons/fa';
 
 export default function PreviewCodePanel({ data }) {
   const [view, setView] = useState('preview'); // 'preview' or 'code'
@@ -17,6 +17,19 @@ export default function PreviewCodePanel({ data }) {
     setCopied(true);
     toast.success('Markdown copied to clipboard!');
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleDownload = () => {
+    const blob = new Blob([markdown], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'README.md';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    toast.success('README.md downloaded!');
   };
 
   return (
@@ -41,20 +54,36 @@ export default function PreviewCodePanel({ data }) {
           </button>
         </div>
 
-        <button
-          onClick={handleCopy}
-          disabled={isEmpty}
-          className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md border transition-colors \${
-            isEmpty 
-              ? 'opacity-50 cursor-not-allowed border-[var(--color-github-border)] text-[var(--color-github-text-muted)]' 
-              : copied 
-                ? 'bg-green-500/10 border-green-500/50 text-green-400 shadow-[0_0_10px_rgba(34,197,94,0.2)]' 
-                : 'bg-[var(--color-github-border)] hover:bg-[var(--color-github-border)]/80 text-white border-[var(--color-github-border)] hover:border-[var(--color-github-text-muted)]'
-          }`}
-        >
-          {copied ? <FaCheck className="w-4 h-4" /> : <FaCopy className="w-4 h-4" />}
-          {copied ? 'Copied!' : 'Copy Markdown'}
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={handleDownload}
+            disabled={isEmpty}
+            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md border transition-colors ${
+              isEmpty 
+                ? 'opacity-50 cursor-not-allowed border-[var(--color-github-border)] text-[var(--color-github-text-muted)]' 
+                : 'bg-[var(--color-github-dark)] hover:bg-[var(--color-github-border)]/50 text-white border-[var(--color-github-border)] hover:border-[var(--color-github-text-muted)]'
+            }`}
+            title="Download README.md"
+          >
+            <FaDownload className="w-4 h-4" />
+            <span className="hidden lg:inline">Download</span>
+          </button>
+
+          <button
+            onClick={handleCopy}
+            disabled={isEmpty}
+            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md border transition-colors ${
+              isEmpty 
+                ? 'opacity-50 cursor-not-allowed border-[var(--color-github-border)] text-[var(--color-github-text-muted)]' 
+                : copied 
+                  ? 'bg-green-500/10 border-green-500/50 text-green-400 shadow-[0_0_10px_rgba(34,197,94,0.2)]' 
+                  : 'bg-[var(--color-github-accent)] hover:bg-[var(--color-github-accent)]/80 text-white border-[var(--color-github-accent)]'
+            }`}
+          >
+            {copied ? <FaCheck className="w-4 h-4" /> : <FaCopy className="w-4 h-4" />}
+            {copied ? 'Copied!' : 'Copy Markdown'}
+          </button>
+        </div>
       </div>
 
       <div className="flex-1 bg-[var(--color-github-dark)] border border-[var(--color-github-border)] rounded-md overflow-hidden flex flex-col relative w-full shadow-inner">
