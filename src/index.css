@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --color-github-dark: #0d1117;
+  --color-github-darker: #010409;
+  --color-github-border: #30363d;
+  --color-github-text: #c9d1d9;
+  --color-github-text-muted: #8b949e;
+  --color-github-accent: #2f81f7;
+}
+
+body {
+  background-color: var(--color-github-dark);
+  color: var(--color-github-text);
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom Scrollbar */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: var(--color-github-border);
+  border-radius: 10px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-github-text-muted);
+}
+
+/* Markdown Preview Styles */
+.markdown-body h1 {
+  font-size: 2em;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--color-github-border);
+}
+.markdown-body h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--color-github-border);
+}
+.markdown-body h3 {
+  font-size: 1.25em;
+  font-weight: 600;
+  margin-bottom: 1em;
+}
+.markdown-body p {
+  margin-bottom: 1em;
+  line-height: 1.5;
+}
+.markdown-body img {
+  max-width: 100%;
+  display: inline-block;
+}
+.markdown-body a {
+  color: var(--color-github-accent);
+  text-decoration: none;
+}
+.markdown-body a:hover {
+  text-decoration: underline;
+}
