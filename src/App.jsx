@@ -22,7 +22,8 @@ function App() {
       youtube: '',
       discord: '',
       email: ''
-    }
+    },
+    statsTheme: 'github_dark'
   });
 
   const updateData = (section, value) => {

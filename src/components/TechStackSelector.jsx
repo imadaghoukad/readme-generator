@@ -4,11 +4,18 @@ const techCategories = {
     { name: 'TypeScript', badge: 'TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white' },
     { name: 'Python', badge: 'Python-14354C?style=for-the-badge&logo=python&logoColor=white' },
     { name: 'Java', badge: 'Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white' },
-    { name: 'C++', badge: 'C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white' },
-    { name: 'C', badge: 'C-00599C?style=for-the-badge&logo=c&logoColor=white' },
     { name: 'Go', badge: 'Go-00ADD8?style=for-the-badge&logo=go&logoColor=white' },
     { name: 'Rust', badge: 'Rust-000000?style=for-the-badge&logo=rust&logoColor=white' },
     { name: 'PHP', badge: 'PHP-777BB4?style=for-the-badge&logo=php&logoColor=white' }
+  ],
+  'Low-Level & Security': [
+    { name: 'C', badge: 'C-00599C?style=for-the-badge&logo=c&logoColor=white' },
+    { name: 'C++', badge: 'C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white' },
+    { name: 'Makefile', badge: 'Makefile-000000?style=for-the-badge&logo=make&logoColor=white' },
+    { name: 'TryHackMe', badge: 'TryHackMe-212c42?style=for-the-badge&logo=tryhackme&logoColor=white' },
+    { name: 'HackTheBox', badge: 'HackTheBox-111921?style=for-the-badge&logo=hackthebox&logoColor=9fef00' },
+    { name: 'Wireshark', badge: 'Wireshark-1679A7?style=for-the-badge&logo=wireshark&logoColor=white' },
+    { name: 'Nmap', badge: 'Nmap-4F5E6B?style=for-the-badge&logo=nmap&logoColor=white' }
   ],
   Frameworks: [
     { name: 'React', badge: 'React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB' },

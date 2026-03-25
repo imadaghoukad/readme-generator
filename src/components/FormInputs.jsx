@@ -53,6 +53,20 @@ export default function FormInputs({ data, updateData }) {
             onChange={(e) => updateData('github', e.target.value)}
           />
         </div>
+
+        <div className="mt-4">
+          <label className="block text-sm font-medium text-[var(--color-github-text)] mb-1">GitHub Stats Theme</label>
+          <select
+            className="w-full bg-[var(--color-github-darker)] border border-[var(--color-github-border)] rounded-md px-3 py-2 text-white focus:outline-none focus:border-[var(--color-github-accent)] focus:ring-1 focus:ring-[var(--color-github-accent)] transition-colors appearance-none cursor-pointer"
+            value={data.statsTheme}
+            onChange={(e) => updateData('statsTheme', e.target.value)}
+          >
+            <option value="github_dark">GitHub Dark</option>
+            <option value="radical">Radical</option>
+            <option value="dracula">Dracula</option>
+            <option value="tokyonight">Tokyo Night</option>
+          </select>
+        </div>
       </div>
     </div>
   );
