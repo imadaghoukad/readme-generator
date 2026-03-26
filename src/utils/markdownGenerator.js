@@ -39,9 +39,21 @@ export function generateMarkdown(data) {
   // Tech Stack
   if (data.techStack && data.techStack.length > 0) {
     md += `## ${generateUnicodeHeading('Tech Stack')}\n\n`;
-    md += `<p align="left">\n`;
-    md += data.techStack.map(tech => `<img src="https://img.shields.io/badge/${tech.badge}" alt="${tech.name}" />`).join(' ');
-    md += `\n</p>\n\n`;
+    
+    // Group by category
+    const grouped = data.techStack.reduce((acc, tech) => {
+      const cat = tech.category || 'Other';
+      if (!acc[cat]) acc[cat] = [];
+      acc[cat].push(tech);
+      return acc;
+    }, {});
+
+    Object.entries(grouped).forEach(([category, techs]) => {
+      md += `### ${category}\n\n`;
+      md += `<p align="left">\n`;
+      md += techs.map(tech => `<img src="https://img.shields.io/badge/${tech.badge}" alt="${tech.name}" />`).join(' ');
+      md += `\n</p>\n\n`;
+    });
   }
 
   // GitHub Stats
@@ -49,7 +61,15 @@ export function generateMarkdown(data) {
     md += `## ${generateUnicodeHeading('GitHub Stats')}\n\n`;
     md += `<p align="center">\n`;
     md += `  <img src="https://github-readme-stats.vercel.app/api?username=${data.github}&show_icons=true&theme=${data.statsTheme}" alt="${data.github}'s GitHub stats" />\n`;
-    md += `  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${data.github}&layout=compact&theme=${data.statsTheme}" alt="Top Languages" />\n`;
+    
+    if (data.showLanguages) {
+      md += `  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${data.github}&layout=compact&theme=${data.statsTheme}" alt="Top Languages" />\n`;
+    }
+    
+    if (data.showStreak) {
+      md += `  <img src="https://github-readme-streak-stats.herokuapp.com/?user=${data.github}&theme=${data.statsTheme}" alt="GitHub Streak" />\n`;
+    }
+    
     md += `</p>\n\n`;
   }
 

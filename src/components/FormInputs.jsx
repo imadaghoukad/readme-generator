@@ -54,6 +54,28 @@ export default function FormInputs({ data, updateData }) {
           />
         </div>
 
+        <div className="mt-6 space-y-4">
+          <div className="flex items-center justify-between p-3 rounded-md bg-[var(--color-github-dark)] border border-[var(--color-github-border)]">
+            <span className="text-sm font-medium text-white">Show Top Languages Card</span>
+            <button
+              onClick={() => updateData('showLanguages', !data.showLanguages)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${data.showLanguages ? 'bg-[var(--color-github-accent)]' : 'bg-slate-700'}`}
+            >
+              <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${data.showLanguages ? 'translate-x-6' : 'translate-x-1'}`} />
+            </button>
+          </div>
+
+          <div className="flex items-center justify-between p-3 rounded-md bg-[var(--color-github-dark)] border border-[var(--color-github-border)]">
+            <span className="text-sm font-medium text-white">Show GitHub Streak Stats</span>
+            <button
+              onClick={() => updateData('showStreak', !data.showStreak)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${data.showStreak ? 'bg-[var(--color-github-accent)]' : 'bg-slate-700'}`}
+            >
+              <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${data.showStreak ? 'translate-x-6' : 'translate-x-1'}`} />
+            </button>
+          </div>
+        </div>
+
         <div className="mt-4">
           <label className="block text-sm font-medium text-[var(--color-github-text)] mb-1">GitHub Stats Theme</label>
           <select

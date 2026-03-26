@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FormInputs from './components/FormInputs';
 import TechStackSelector from './components/TechStackSelector';
 import SocialLinks from './components/SocialLinks';
@@ -8,23 +8,39 @@ import { Toaster } from 'react-hot-toast';
 import './index.css';
 
 function App() {
-  const [data, setData] = useState({
-    name: '',
-    subtitle: '',
-    about: '',
-    github: '',
-    techStack: [],
-    socials: {
-      linkedin: '',
-      twitter: '',
-      instagram: '',
-      facebook: '',
-      youtube: '',
-      discord: '',
-      email: ''
-    },
-    statsTheme: 'github_dark'
+  const [data, setData] = useState(() => {
+    const saved = localStorage.getItem('github-readme-generator-data');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error("Failed to parse saved data", e);
+      }
+    }
+    return {
+      name: '',
+      subtitle: '',
+      about: '',
+      github: '',
+      techStack: [],
+      socials: {
+        linkedin: '',
+        twitter: '',
+        instagram: '',
+        facebook: '',
+        youtube: '',
+        discord: '',
+        email: ''
+      },
+      statsTheme: 'github_dark',
+      showLanguages: true,
+      showStreak: true
+    };
   });
+
+  useEffect(() => {
+    localStorage.setItem('github-readme-generator-data', JSON.stringify(data));
+  }, [data]);
 
   const updateData = (section, value) => {
     setData(prev => ({ ...prev, [section]: value }));

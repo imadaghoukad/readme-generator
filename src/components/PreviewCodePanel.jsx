@@ -1,13 +1,18 @@
-import React from 'react';
-import { Copy, Download, Check } from 'lucide-react';
+import { useState } from 'react';
+import { Copy, Download, Check, Eye, Code } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import { generateMarkdown } from '../utils/markdownGenerator';
 
-const PreviewCodePanel = ({ markdown, isPreview, setIsPreview }) => {
-  const [copied, setCopied] = React.useState(false);
+import { toast } from 'react-hot-toast';
+
+const PreviewCodePanel = ({ data }) => {
+  const [isPreview, setIsPreview] = useState(true);
+  const markdown = generateMarkdown(data);
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(markdown);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    toast.success('Markdown copied to clipboard!');
   };
 
   const handleDownload = () => {
@@ -20,6 +25,7 @@ const PreviewCodePanel = ({ markdown, isPreview, setIsPreview }) => {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+    toast.success('README.md downloaded successfully!');
   };
 
   return (
@@ -28,15 +34,17 @@ const PreviewCodePanel = ({ markdown, isPreview, setIsPreview }) => {
         <div className="flex space-x-2">
           <button
             onClick={() => setIsPreview(true)}
-            className={`px-3 py-1 text-sm rounded ${isPreview ? 'bg-slate-700 text-white' : 'text-slate-400 hover:text-white'}`}
+            className={`flex items-center space-x-1 px-3 py-1 text-sm rounded transition ${isPreview ? 'bg-slate-700 text-white' : 'text-slate-400 hover:text-white'}`}
           >
-            Preview
+            <Eye size={16} />
+            <span>Preview</span>
           </button>
           <button
             onClick={() => setIsPreview(false)}
-            className={`px-3 py-1 text-sm rounded ${!isPreview ? 'bg-slate-700 text-white' : 'text-slate-400 hover:text-white'}`}
+            className={`flex items-center space-x-1 px-3 py-1 text-sm rounded transition ${!isPreview ? 'bg-slate-700 text-white' : 'text-slate-400 hover:text-white'}`}
           >
-            Code
+            <Code size={16} />
+            <span>Code</span>
           </button>
         </div>
         <div className="flex space-x-2">
@@ -45,13 +53,23 @@ const PreviewCodePanel = ({ markdown, isPreview, setIsPreview }) => {
             <span>Download README.md</span>
           </button>
           <button onClick={handleCopy} className="flex items-center space-x-1 px-3 py-1 bg-slate-700 hover:bg-slate-600 text-white text-sm rounded transition">
-            {copied ? <Check size={16} /> : <Copy size={16} />}
-            <span>{copied ? 'Copied!' : 'Copy Markdown'}</span>
+            <Copy size={16} />
+            <span>Copy Markdown</span>
           </button>
         </div>
       </div>
-      <div className="flex-1 overflow-auto p-4">
-        {/* L-code dyal l-render gha i-koun hna */}
+      <div className="flex-1 overflow-auto p-6 scrollbar-thin">
+        {isPreview ? (
+          <div className="prose prose-invert max-w-none markdown-preview">
+            <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+              {markdown}
+            </ReactMarkdown>
+          </div>
+        ) : (
+          <pre className="text-sm font-mono text-slate-300 whitespace-pre-wrap bg-slate-950 p-4 rounded border border-slate-800">
+            {markdown}
+          </pre>
+        )}
       </div>
     </div>
   );
