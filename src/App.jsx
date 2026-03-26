@@ -67,20 +67,20 @@ function App() {
         <h1 className="text-xl font-bold tracking-tight text-white">GitHub Profile README Generator</h1>
       </header>
 
-      <main className="flex-1 flex flex-col md:flex-row overflow-hidden h-[calc(100vh-73px)]">
-        {/* Left Panel - Editor */}
-        <div className="w-full md:w-1/2 h-full overflow-y-auto p-6 md:p-8 border-r border-[var(--color-github-border)] space-y-10 scrollbar-thin">
-          <FormInputs data={data} updateData={updateData} />
-          <hr className="border-[var(--color-github-border)]" />
-          <TechStackSelector selectedTech={data.techStack} updateTech={(tech) => updateData('techStack', tech)} />
-          <hr className="border-[var(--color-github-border)]" />
-          <SocialLinks socials={data.socials} updateSocials={updateSocials} />
-          <div className="pb-8"></div>
-        </div>
+      <main className="flex-1 overflow-hidden h-[calc(100vh-73px)]">
+        <div className="h-full overflow-y-auto px-6 py-6 md:px-8 md:py-8 lg:px-10 lg:py-10 scrollbar-thin">
+          <div className="mx-auto grid max-w-[1700px] grid-cols-1 gap-10 xl:grid-cols-2">
+            <div className="space-y-8 xl:space-y-10">
+              <FormInputs data={data} updateData={updateData} />
+              <TechStackSelector selectedTech={data.techStack} updateTech={(tech) => updateData('techStack', tech)} />
+              <SocialLinks socials={data.socials} updateSocials={updateSocials} />
+              <div className="pb-8"></div>
+            </div>
 
-        {/* Right Panel - Preview */}
-        <div className="w-full md:w-1/2 h-full overflow-y-auto bg-[var(--color-github-darker)] p-6 md:p-8">
-          <PreviewCodePanel data={data} />
+            <div className="pt-2 md:pt-4 xl:pt-8">
+              <PreviewCodePanel data={data} />
+            </div>
+          </div>
         </div>
       </main>
     </div>

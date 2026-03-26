@@ -68,22 +68,26 @@ export default function TechStackSelector({ selectedTech, updateTech }) {
   };
 
   return (
-    <div className="space-y-6">
+    <section className="rounded-3xl border border-emerald-500/15 bg-white/5 p-8 shadow-[0_0_20px_rgba(16,185,129,0.1)] backdrop-blur-xl md:p-10">
+      <div className="space-y-8">
       <div>
-        <h2 className="text-2xl font-semibold text-white mb-1">Tech Stack</h2>
-        <p className="text-[var(--color-github-text-muted)] text-sm mb-4">Select the technologies you work with.</p>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-emerald-300/80">Tech Stack</p>
+        <h2 className="text-2xl font-semibold text-white mb-2">Tech Stack</h2>
+        <p className="text-[var(--color-github-text-muted)] text-sm">Select the technologies you work with.</p>
       </div>
 
-      <div className="space-y-4">
+      <hr className="border-0 border-t border-emerald-500/20" />
+
+      <div className="space-y-5">
         {Object.entries(techCategories).map(([category, items]) => {
           const isExpanded = expandedCategories[category];
           const selectedInCategory = items.filter(tech => selectedTech.some(t => t.name === tech.name)).length;
 
           return (
-            <div key={category} className="border border-[var(--color-github-border)] rounded-lg overflow-hidden bg-[var(--color-github-darker)]">
+            <div key={category} className="border border-[var(--color-github-border)] rounded-2xl overflow-hidden bg-[var(--color-github-darker)]/80">
               <button
                 onClick={() => toggleCategory(category)}
-                className="w-full flex items-center justify-between p-4 hover:bg-[var(--color-github-dark)] transition-colors text-left"
+                className="w-full flex items-center justify-between p-5 hover:bg-[var(--color-github-dark)] transition-colors text-left"
               >
                 <div className="flex items-center gap-3">
                   {isExpanded ? <ChevronDown className="w-5 h-5 text-[var(--color-github-text-muted)]" /> : <ChevronRight className="w-5 h-5 text-[var(--color-github-text-muted)]" />}
@@ -94,21 +98,21 @@ export default function TechStackSelector({ selectedTech, updateTech }) {
                     </span>
                   )}
                 </div>
-                <span className="text-xs text-[var(--color-github-text-muted)] uppercase tracking-wider font-medium">
+                <span className="text-xs text-[var(--color-github-text-muted)] uppercase tracking-widest font-medium">
                   {items.length} optional
                 </span>
               </button>
 
               {isExpanded && (
-                <div className="p-4 pt-0">
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 border-t border-[var(--color-github-border)] pt-4">
+                <div className="px-5 pb-5">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 border-t border-emerald-500/20 pt-5">
                     {items.map(tech => {
                       const isSelected = selectedTech.some(t => t.name === tech.name);
                       return (
                         <button
                           key={tech.name}
                           onClick={() => toggleTech(tech)}
-                          className={`flex items-center justify-center text-center px-3 py-2 rounded-md border text-xs font-medium transition-all duration-200 ease-in-out ${
+                          className={`flex min-h-11 items-center justify-center text-center px-4 py-3 rounded-xl border text-xs font-medium transition-all duration-200 ease-in-out ${
                             isSelected 
                               ? 'bg-[var(--color-github-accent)]/20 border-[var(--color-github-accent)] text-[var(--color-github-accent)] shadow-[0_0_10px_rgba(47,129,247,0.3)]' 
                               : 'bg-[var(--color-github-darker)] border-[var(--color-github-border)] text-[var(--color-github-text)] hover:border-[var(--color-github-text-muted)] hover:text-white'
@@ -125,6 +129,7 @@ export default function TechStackSelector({ selectedTech, updateTech }) {
           );
         })}
       </div>
-    </div>
+      </div>
+    </section>
   );
 }
