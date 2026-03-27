@@ -1,25 +1,66 @@
 @import "tailwindcss";
 
 @theme {
-  --color-github-dark: #0d1117;
-  --color-github-darker: #010409;
-  --color-github-border: #30363d;
-  --color-github-text: #c9d1d9;
-  --color-github-text-muted: #8b949e;
-  --color-github-accent: #2f81f7;
+  --color-ios-black: #000000;
+  --color-ios-card: #1C1C1E;
+  --color-ios-input: #2C2C2E;
+  --color-ios-border: rgba(255, 255, 255, 0.05);
+  --color-ios-text: #FFFFFF;
+  --color-ios-secondary: #8E8E93;
+  --color-ios-blue: #0A84FF;
+  --color-ios-green: #30D158;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background-color: var(--color-github-dark);
-  color: var(--color-github-text);
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Scrollbar */
+/* iOS Safe Area Utilities */
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ── Floating Card Shadow ── */
+.card-float {
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.45),
+    0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.card-float-hover {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.card-float-hover:hover {
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.55),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Prevent horizontal overflow on code blocks */
+pre, code {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Custom Scrollbar — minimal & dark */
 .scrollbar-thin::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-track {
@@ -27,30 +68,30 @@ body {
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background-color: var(--color-github-border);
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-github-text-muted);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Markdown Preview Styles */
 .markdown-body h1 {
   font-size: 2em;
-  font-weight: 600;
+  font-weight: 800;
   margin-bottom: 0.5em;
   padding-bottom: 0.3em;
-  border-bottom: 1px solid var(--color-github-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .markdown-body h2 {
   font-size: 1.5em;
-  font-weight: 600;
+  font-weight: 700;
   margin-top: 1.5em;
   margin-bottom: 1em;
   padding-bottom: 0.3em;
-  border-bottom: 1px solid var(--color-github-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .markdown-body h3 {
@@ -61,7 +102,8 @@ body {
 
 .markdown-body p {
   margin-bottom: 1em;
-  line-height: 1.5;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .markdown-body img {
@@ -70,10 +112,15 @@ body {
 }
 
 .markdown-body a {
-  color: var(--color-github-accent);
+  color: #0A84FF;
   text-decoration: none;
 }
 
 .markdown-body a:hover {
   text-decoration: underline;
+}
+
+/* ── Smooth input transitions ── */
+input, textarea, select {
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
 }

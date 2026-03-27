@@ -54,33 +54,44 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-github-dark)] text-[var(--color-github-text)] flex flex-col font-sans">
-      <Toaster 
-        position="bottom-right" 
-        toastOptions={{ 
-          style: { background: 'var(--color-github-darker)', color: 'var(--color-github-text)', border: '1px solid var(--color-github-border)' },
-          success: { iconTheme: { primary: '#2f81f7', secondary: '#fff' } }
-        }} 
+    <div
+      className="min-h-screen bg-[#000000] text-white flex flex-col"
+      style={{
+        fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, sans-serif',
+        paddingTop: 'env(safe-area-inset-top)',
+        paddingBottom: 'env(safe-area-inset-bottom)'
+      }}
+    >
+      <Toaster
+        position="bottom-center"
+        toastOptions={{
+          style: { background: '#1C1C1E', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '9999px', fontSize: '14px' },
+          success: { iconTheme: { primary: '#0A84FF', secondary: '#fff' } }
+        }}
       />
-      <header className="border-b border-[var(--color-github-border)] bg-[var(--color-github-darker)] p-4 flex items-center gap-3 shadow-md z-10">
-        <FaGithub className="w-8 h-8 text-[var(--color-github-text)]" />
-        <h1 className="text-xl font-bold tracking-tight text-white">GitHub Profile README Generator</h1>
+
+      {/* Header */}
+      <header className="bg-[#000000] px-6 md:px-12 pb-4 pt-12 md:pt-8 flex items-center gap-3 z-10">
+        <FaGithub className="w-7 h-7 md:w-8 md:h-8 text-[#0A84FF]" />
+        <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">README Generator</h1>
       </header>
 
-      <main className="flex-1 flex flex-col md:flex-row overflow-hidden h-[calc(100vh-73px)]">
-        {/* Left Panel - Editor */}
-        <div className="w-full md:w-1/2 h-full overflow-y-auto p-6 md:p-8 border-r border-[var(--color-github-border)] space-y-10 scrollbar-thin">
-          <FormInputs data={data} updateData={updateData} />
-          <hr className="border-[var(--color-github-border)]" />
-          <TechStackSelector selectedTech={data.techStack} updateTech={(tech) => updateData('techStack', tech)} />
-          <hr className="border-[var(--color-github-border)]" />
-          <SocialLinks socials={data.socials} updateSocials={updateSocials} />
-          <div className="pb-8"></div>
+      {/* Main Content — single-column mobile, 60/40 desktop grid */}
+      <main className="flex-1 flex flex-col md:grid md:grid-cols-[1.1fr_0.9fr] overflow-hidden md:h-[calc(100vh-80px)]">
+        {/* Left Panel — Editor */}
+        <div className="w-full md:h-full overflow-y-auto px-6 md:px-12 pb-8 scrollbar-thin">
+          <div className="flex flex-col gap-8 md:gap-10">
+            <FormInputs data={data} updateData={updateData} />
+            <TechStackSelector selectedTech={data.techStack} updateTech={(tech) => updateData('techStack', tech)} />
+            <SocialLinks socials={data.socials} updateSocials={updateSocials} />
+          </div>
+          <div className="pb-[env(safe-area-inset-bottom)]"></div>
         </div>
 
-        {/* Right Panel - Preview */}
-        <div className="w-full md:w-1/2 h-full overflow-y-auto bg-[var(--color-github-darker)] p-6 md:p-8">
+        {/* Right Panel — Preview */}
+        <div className="w-full md:h-full overflow-y-auto px-6 md:px-12 pb-8">
           <PreviewCodePanel data={data} />
+          <div className="pb-[env(safe-area-inset-bottom)]"></div>
         </div>
       </main>
     </div>

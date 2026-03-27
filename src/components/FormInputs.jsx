@@ -1,85 +1,88 @@
 export default function FormInputs({ data, updateData }) {
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold text-white mb-1">Personal Information</h2>
-        <p className="text-[var(--color-github-text-muted)] text-sm mb-4">Introduce yourself to the community.</p>
+    <div className="space-y-8">
+      {/* Personal Information Card */}
+      <div className="bg-[#1C1C1E] rounded-[28px] p-5 md:p-6 border border-white/5 card-float">
+        <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-1">Personal Information</h2>
+        <p className="text-[#8E8E93] text-sm mb-5">Introduce yourself to the community.</p>
+
+        <div className="space-y-4">
+          <div>
+            <label className="block text-[#8E8E93] text-sm font-medium mb-1.5">Name</label>
+            <input
+              type="text"
+              className="w-full min-h-[48px] bg-[#2C2C2E] border-none rounded-2xl px-4 py-3 text-white placeholder-[#636366] focus:outline-none focus:ring-1 focus:ring-blue-600/50"
+              placeholder="e.g. John Doe"
+              value={data.name}
+              onChange={(e) => updateData('name', e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className="block text-[#8E8E93] text-sm font-medium mb-1.5">Subtitle</label>
+            <input
+              type="text"
+              className="w-full min-h-[48px] bg-[#2C2C2E] border-none rounded-2xl px-4 py-3 text-white placeholder-[#636366] focus:outline-none focus:ring-1 focus:ring-blue-600/50"
+              placeholder="e.g. Full-stack Developer"
+              value={data.subtitle}
+              onChange={(e) => updateData('subtitle', e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className="block text-[#8E8E93] text-sm font-medium mb-1.5">About Me</label>
+            <textarea
+              className="w-full min-h-[48px] bg-[#2C2C2E] border-none rounded-2xl px-4 py-3 text-white h-28 resize-y placeholder-[#636366] focus:outline-none focus:ring-1 focus:ring-blue-600/50"
+              placeholder="Tell us a little about yourself..."
+              value={data.about}
+              onChange={(e) => updateData('about', e.target.value)}
+            ></textarea>
+          </div>
+        </div>
       </div>
 
-      <div className="space-y-4">
+      {/* GitHub Integration Card */}
+      <div className="bg-[#1C1C1E] rounded-[28px] p-5 md:p-6 border border-white/5 card-float">
+        <h3 className="text-2xl md:text-3xl font-extrabold text-white mb-1">GitHub Integration</h3>
+        <p className="text-[#8E8E93] text-sm mb-5">Required to fetch GitHub Stats.</p>
+        
         <div>
-          <label className="block text-sm font-medium text-[var(--color-github-text)] mb-1">Name</label>
+          <label className="block text-[#8E8E93] text-sm font-medium mb-1.5">GitHub Username</label>
           <input
             type="text"
-            className="w-full bg-[var(--color-github-darker)] border border-[var(--color-github-border)] rounded-md px-3 py-2 text-white focus:outline-none focus:border-[var(--color-github-accent)] focus:ring-1 focus:ring-[var(--color-github-accent)] transition-colors"
-            placeholder="e.g. John Doe"
-            value={data.name}
-            onChange={(e) => updateData('name', e.target.value)}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-[var(--color-github-text)] mb-1">Subtitle</label>
-          <input
-            type="text"
-            className="w-full bg-[var(--color-github-darker)] border border-[var(--color-github-border)] rounded-md px-3 py-2 text-white focus:outline-none focus:border-[var(--color-github-accent)] focus:ring-1 focus:ring-[var(--color-github-accent)] transition-colors"
-            placeholder="e.g. Full-stack Developer"
-            value={data.subtitle}
-            onChange={(e) => updateData('subtitle', e.target.value)}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-[var(--color-github-text)] mb-1">About Me</label>
-          <textarea
-            className="w-full bg-[var(--color-github-darker)] border border-[var(--color-github-border)] rounded-md px-3 py-2 text-white h-24 resize-y focus:outline-none focus:border-[var(--color-github-accent)] focus:ring-1 focus:ring-[var(--color-github-accent)] transition-colors"
-            placeholder="Tell us a little about yourself..."
-            value={data.about}
-            onChange={(e) => updateData('about', e.target.value)}
-          ></textarea>
-        </div>
-      </div>
-
-      <div className="pt-6 mt-6 border-t border-[var(--color-github-border)]">
-        <h3 className="text-lg font-medium text-white mb-1">GitHub Integration</h3>
-        <p className="text-[var(--color-github-text-muted)] text-sm mb-4">Required to fetch GitHub Stats.</p>
-        <div>
-          <label className="block text-sm font-medium text-[var(--color-github-text)] mb-1">GitHub Username</label>
-          <input
-            type="text"
-            className="w-full bg-[var(--color-github-darker)] border border-[var(--color-github-border)] rounded-md px-3 py-2 text-white focus:outline-none focus:border-[var(--color-github-accent)] focus:ring-1 focus:ring-[var(--color-github-accent)] transition-colors"
+            className="w-full min-h-[48px] bg-[#2C2C2E] border-none rounded-2xl px-4 py-3 text-white placeholder-[#636366] focus:outline-none focus:ring-1 focus:ring-blue-600/50"
             placeholder="e.g. torvalds"
             value={data.github}
             onChange={(e) => updateData('github', e.target.value)}
           />
         </div>
 
-        <div className="mt-6 space-y-4">
-          <div className="flex items-center justify-between p-3 rounded-md bg-[var(--color-github-dark)] border border-[var(--color-github-border)]">
+        <div className="mt-5 space-y-3">
+          <div className="flex items-center justify-between p-4 min-h-[48px] rounded-2xl bg-[#2C2C2E]">
             <span className="text-sm font-medium text-white">Show Top Languages Card</span>
             <button
               onClick={() => updateData('showLanguages', !data.showLanguages)}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${data.showLanguages ? 'bg-[var(--color-github-accent)]' : 'bg-slate-700'}`}
+              className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors duration-200 focus:outline-none ${data.showLanguages ? 'bg-[#0A84FF]' : 'bg-[#3A3A3C]'}`}
             >
-              <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${data.showLanguages ? 'translate-x-6' : 'translate-x-1'}`} />
+              <span className={`inline-block h-6 w-6 transform rounded-full bg-white shadow-sm transition-transform duration-200 ${data.showLanguages ? 'translate-x-7' : 'translate-x-1'}`} />
             </button>
           </div>
 
-          <div className="flex items-center justify-between p-3 rounded-md bg-[var(--color-github-dark)] border border-[var(--color-github-border)]">
+          <div className="flex items-center justify-between p-4 min-h-[48px] rounded-2xl bg-[#2C2C2E]">
             <span className="text-sm font-medium text-white">Show GitHub Streak Stats</span>
             <button
               onClick={() => updateData('showStreak', !data.showStreak)}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${data.showStreak ? 'bg-[var(--color-github-accent)]' : 'bg-slate-700'}`}
+              className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors duration-200 focus:outline-none ${data.showStreak ? 'bg-[#0A84FF]' : 'bg-[#3A3A3C]'}`}
             >
-              <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${data.showStreak ? 'translate-x-6' : 'translate-x-1'}`} />
+              <span className={`inline-block h-6 w-6 transform rounded-full bg-white shadow-sm transition-transform duration-200 ${data.showStreak ? 'translate-x-7' : 'translate-x-1'}`} />
             </button>
           </div>
         </div>
 
         <div className="mt-4">
-          <label className="block text-sm font-medium text-[var(--color-github-text)] mb-1">GitHub Stats Theme</label>
+          <label className="block text-[#8E8E93] text-sm font-medium mb-1.5">GitHub Stats Theme</label>
           <select
-            className="w-full bg-[var(--color-github-darker)] border border-[var(--color-github-border)] rounded-md px-3 py-2 text-white focus:outline-none focus:border-[var(--color-github-accent)] focus:ring-1 focus:ring-[var(--color-github-accent)] transition-colors appearance-none cursor-pointer"
+            className="w-full min-h-[48px] bg-[#2C2C2E] border-none rounded-2xl px-4 py-3 text-white focus:outline-none focus:ring-1 focus:ring-blue-600/50 appearance-none cursor-pointer"
             value={data.statsTheme}
             onChange={(e) => updateData('statsTheme', e.target.value)}
           >

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Copy, Download, Check, Eye, Code } from 'lucide-react';
+import { Copy, Download, Eye, Code } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import { generateMarkdown } from '../utils/markdownGenerator';
@@ -29,36 +29,49 @@ const PreviewCodePanel = ({ data }) => {
   };
 
   return (
-    <div className="bg-slate-900 rounded-lg border border-slate-700 overflow-hidden flex flex-col h-full">
-      <div className="flex items-center justify-between px-4 py-2 bg-slate-800 border-b border-slate-700">
-        <div className="flex space-x-2">
+    <div className="bg-[#1C1C1E] rounded-[28px] border border-white/5 overflow-hidden flex flex-col h-full card-float">
+      {/* Toolbar */}
+      <div className="flex flex-wrap items-center justify-between gap-2 px-4 md:px-5 py-3 border-b border-white/5">
+        <div className="flex gap-1">
           <button
             onClick={() => setIsPreview(true)}
-            className={`flex items-center space-x-1 px-3 py-1 text-sm rounded transition ${isPreview ? 'bg-slate-700 text-white' : 'text-slate-400 hover:text-white'}`}
+            className={`flex items-center gap-1.5 px-4 py-2.5 min-h-[44px] text-sm font-medium rounded-full transition-all ${
+              isPreview ? 'bg-[#2C2C2E] text-white' : 'text-[#8E8E93] hover:text-white'
+            }`}
           >
-            <Eye size={16} />
+            <Eye size={18} />
             <span>Preview</span>
           </button>
           <button
             onClick={() => setIsPreview(false)}
-            className={`flex items-center space-x-1 px-3 py-1 text-sm rounded transition ${!isPreview ? 'bg-slate-700 text-white' : 'text-slate-400 hover:text-white'}`}
+            className={`flex items-center gap-1.5 px-4 py-2.5 min-h-[44px] text-sm font-medium rounded-full transition-all ${
+              !isPreview ? 'bg-[#2C2C2E] text-white' : 'text-[#8E8E93] hover:text-white'
+            }`}
           >
-            <Code size={16} />
+            <Code size={18} />
             <span>Code</span>
           </button>
         </div>
-        <div className="flex space-x-2">
-          <button onClick={handleDownload} className="flex items-center space-x-1 px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-sm rounded transition">
-            <Download size={16} />
-            <span>Download README.md</span>
+        <div className="flex gap-2">
+          <button
+            onClick={handleDownload}
+            className="flex items-center gap-1.5 px-5 py-2.5 min-h-[44px] bg-[#0A84FF] hover:bg-[#0A84FF]/80 text-white text-sm font-semibold rounded-full transition-all"
+          >
+            <Download size={18} />
+            <span className="hidden sm:inline">Download</span>
           </button>
-          <button onClick={handleCopy} className="flex items-center space-x-1 px-3 py-1 bg-slate-700 hover:bg-slate-600 text-white text-sm rounded transition">
-            <Copy size={16} />
-            <span>Copy Markdown</span>
+          <button
+            onClick={handleCopy}
+            className="flex items-center gap-1.5 px-5 py-2.5 min-h-[44px] bg-[#1C1C1E] border border-white/5 hover:bg-white/10 text-[#0A84FF] text-sm font-semibold rounded-full transition-all"
+          >
+            <Copy size={18} />
+            <span className="hidden sm:inline">Copy</span>
           </button>
         </div>
       </div>
-      <div className="flex-1 overflow-auto p-6 scrollbar-thin">
+
+      {/* Content */}
+      <div className="flex-1 overflow-auto p-5 md:p-6 scrollbar-thin">
         {isPreview ? (
           <div className="prose prose-invert max-w-none markdown-preview">
             <ReactMarkdown rehypePlugins={[rehypeRaw]}>
@@ -66,7 +79,7 @@ const PreviewCodePanel = ({ data }) => {
             </ReactMarkdown>
           </div>
         ) : (
-          <pre className="text-sm font-mono text-slate-300 whitespace-pre-wrap bg-slate-950 p-4 rounded border border-slate-800">
+          <pre className="text-sm font-mono text-[#8E8E93] whitespace-pre-wrap break-all overflow-x-auto bg-[#000000] p-4 rounded-2xl border border-white/5">
             {markdown}
           </pre>
         )}
